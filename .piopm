@@ -1,0 +1,12 @@
+{
+  "type": "library",
+  "name": "EnviroDIY_HX711",
+  "version": "0.1.0",
+  "spec": {
+    "owner": "hiveeyes",
+    "id": -999,
+    "name": "EnviroDIY_HX711",
+    "requirements": null,
+    "url": null
+  }
+}

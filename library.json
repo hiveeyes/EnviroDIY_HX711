@@ -1,0 +1,52 @@
+{
+  "name": "EnviroDIY_HX711",
+  "version": "0.0.0",
+  "description": "An EnviroDIY sensor adapter for the canonical HX711 Arduino library by Bogdan Necula",
+  "keywords": "hx711, load cell, weight scale, sensor, envirodiy",
+  "authors": [
+    {
+      "name": "Andreas Motl",
+      "email": "andreas@hiveeyes.org",
+      "maintainer": true
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hiveeyes/EnviroDIY_HX711.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/hiveeyes/EnviroDIY_HX711",
+  "frameworks": "*",
+  "platforms": "*",
+  "examples": "examples/*/*.ino",
+  "export": {
+    "include": [
+      "library.json",
+      "library.properties",
+      "README.md",
+      "src/*",
+      "examples/*/*.ino",
+      "examples/*/*.h",
+      "examples/*/*.[cht]pp",
+      "examples/*/*.ini",
+      "examples/*/*.md",
+      "examples/*/*.ini",
+      "examples/*/*.py",
+      "examples/*/*.txt"
+    ],
+    "exclude": ["*.exe"]
+  },
+  "dependencies": [
+    {
+      "name": "HX711",
+      "owner": "bogde",
+      "library id": "1100",
+      "url": "https://github.com/bogde/HX711.git",
+      "version": "~0.7.4",
+      "note": "An Arduino library to interface the Avia Semiconductor HX711 24-Bit Analog-to-Digital Converter (ADC) for Weight Scales.",
+      "authors": ["Bogdan Necula", "Andreas Motl"],
+      "frameworks": "arduino",
+      "platforms": "atmelavr, atmelsam, ststm32, espressif8266, espressif32"
+    }
+  ]
+}
