@@ -3,8 +3,10 @@
  * Basic demonstration program for reading a HX711 ADC using the
  * `EnviroDIY_ModularSensors` datalogger framework.
  *
+ * Derived from https://github.com/EnviroDIY/ModularSensors/blob/v0.28.4/examples/single_sensor/single_sensor.ino.
+ *
  */
-
+#include <Arduino.h>
 #include <AviaSemiHX711.h>
 
 const int32_t serialBaud = 115200;  // Baud rate for debugging
@@ -26,9 +28,8 @@ const int32_t serialBaud = 115200;  // Baud rate for debugging
 // Create a HX711 sensor object.
 AviaSemiHX711 hx711(HX711_PIN_PDSCK, HX711_PIN_DOUT, LOADCELL_ZERO_OFFSET, LOADCELL_KG_DIVIDER);
 
-// Create a variable pointer for the HX711.
-Variable* hx711Weight =
-        new AviaSemiHX711_Weight(&hx711, "66666666-abcd-1234-ef00-1234567890ab");
+// Create a new instance of the weight variable.
+AviaSemiHX711_Weight hx711_weight(&hx711, "66666666-abcd-1234-ef00-1234567890ab");
 
 
 void setup ()
@@ -37,21 +38,33 @@ void setup ()
     Serial.print(F("Using ModularSensors Library version "));
     Serial.println(MODULAR_SENSORS_VERSION);
 
-    // TODO: Register sensor with framework and run a single measurement cycle.
+    Serial.println("Setting up HX711 sensor");
+    hx711.setup();
 }
 
 void loop ()
 {
+
+    // Send power to the sensor and wake it up.
+    Serial.println("Waking up HX711 sensor");
+    hx711.powerUp();
+    hx711.wake();
+
     // Read sensor.
     Serial.println("Reading HX711 sensor");
     hx711.update();
 
-    // FIXME: Get actual reading value.
-
     // Display reading.
     Serial.print("Weight: ");
-    //Serial.print(hx711.read());
+    Serial.print(hx711_weight.getValueString());
     Serial.println(" kg");
+
+    // Put the sensor back to sleep
+    Serial.println("Hibernating HX711 sensor");
+    hx711.sleep();
+
+    // Cut the sensor power
+    hx711.powerDown();
 
     delay(1000);
 }
